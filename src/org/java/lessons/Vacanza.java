@@ -16,5 +16,70 @@
 
 package org.java.lessons;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Vacanza {
+    private String destinazione;
+    private LocalDate dataInizio;
+    private LocalDate dataFine;
+    public Vacanza(String destinazione, LocalDate dataInizio, LocalDate dataFine){
+         if(destinazione == null || destinazione.isEmpty()){
+             throw new RuntimeException("Non hai inserito alcuna destinazione");
+         }
+
+         if (dataInizio == null || dataFine == null || dataInizio.isBefore(LocalDate.now()) || dataFine.isBefore(dataInizio)){
+            throw new RuntimeException("Le date inserite non sono valide");
+         }
+         this.destinazione = destinazione;
+         this.dataInizio = dataInizio;
+         this.dataFine = dataFine;
+    }
+
+    public String getDestinazione() {
+        return destinazione;
+    }
+
+    public void setDestinazione(String destinazione) {
+        if (destinazione == null || destinazione.isEmpty()) {
+            throw new RuntimeException("Non hai inserito alcuna destinazione");}
+            this.destinazione = destinazione;
+
+    }
+
+    public LocalDate getDataInizio() {
+        return dataInizio;
+    }
+
+    public void setDataInizio(LocalDate dataInizio) {
+        if(dataInizio == null || dataInizio.isBefore(LocalDate.now())){
+            throw new RuntimeException("Data di inizio non valida");
+        }
+        this.dataInizio = dataInizio;
+    }
+
+    public LocalDate getDataFine() {
+        return dataFine;
+    }
+
+    public void setDataFine(LocalDate dataFine) {
+        if(dataFine == null || dataFine.isBefore(dataInizio)){
+            throw new RuntimeException("La data di fine vacanza non è valida");
+        }
+        this.dataFine = dataFine;
+    }
+
+public int CalcoloGiorniVacanza(){
+        Period intervallo = Period.between(dataInizio, dataFine);
+return intervallo.getDays();
+
 }
+
+
+    @Override
+    public String toString() {
+        return "Hai prenotato una vacanza di " + CalcoloGiorniVacanza() + " giorni a "
+                + getDestinazione() + " da " + getDataInizio() + " al " + getDataFine();
+    }
+}
+
