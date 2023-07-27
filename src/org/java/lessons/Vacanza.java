@@ -28,9 +28,13 @@ public class Vacanza {
              throw new RuntimeException("Non hai inserito alcuna destinazione");
          }
 
-         if (dataInizio == null || dataFine == null || dataInizio.isBefore(LocalDate.now()) || dataFine.isBefore(dataInizio)){
-            throw new RuntimeException("Le date inserite non sono valide");
+         if (dataInizio == null || dataFine == null){
+            throw new RuntimeException("Non hai inserito alcuna data");
          }
+
+         if(dataInizio.isBefore(LocalDate.now()) || dataFine.isBefore(dataInizio)){
+             throw new RuntimeException("Formato non supportato");
+        }
          this.destinazione = destinazione;
          this.dataInizio = dataInizio;
          this.dataFine = dataFine;
