@@ -16,9 +16,41 @@
 
 package org.java.lessons;
 
+import java.time.LocalDate;
+import java.util.Scanner;
+
 public class Agenzia {
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+ Vacanza vacanza = null;
+        while(vacanza == null){
+            System.out.println("Destinazione della tua vacanza: ");
+            String destinazione = scan.nextLine();
+            System.out.println("Data di inizio(AAAA-MM-GG): ");
+            LocalDate dataInizio = null;
+            try{
+                dataInizio = LocalDate.parse(scan.nextLine());
+            } catch (RuntimeException e){
+                System.out.println("Data non valida");
+                System.out.println(e.getMessage());
+            }
+System.out.println("Inserisci la data in cui rientrerai: ");
+            LocalDate dataFine = null;
+            try{
+                dataFine = LocalDate.parse(scan.nextLine());
+            } catch(RuntimeException e){
+                System.out.println("Data non valida");
+                System.out.println(e.getMessage());
+            }
+              try {
+                  vacanza = new Vacanza(destinazione, dataInizio,dataFine);
+              } catch (RuntimeException e){
+                  System.out.print("Errore nell'inserimento dei dati, perfavore riprova.");
+                          System.out.print(e.getMessage());
+              }
+        }
 
+        System.out.print(vacanza);
 
     }
 }
