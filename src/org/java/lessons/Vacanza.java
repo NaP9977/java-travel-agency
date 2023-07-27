@@ -33,7 +33,7 @@ public class Vacanza {
          }
 
          if(dataInizio.isBefore(LocalDate.now()) || dataFine.isBefore(dataInizio)){
-             throw new RuntimeException("Formato non supportato");
+             throw new RuntimeException("La data di partenza è già passata o la data di ritorno viene prima di quella di partenza");
         }
          this.destinazione = destinazione;
          this.dataInizio = dataInizio;
